@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="orders-page">
+
+    <h2 class="orders-title">
+        My Orders
+    </h2>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="order-card">
+
+            <div>
+
+                <h4>{{ order.product.name }}</h4>
+
+                <p>Quantity : {{ order.quantity }}</p>
+
+                <p>Price : ₹{{ order.price }}</p>
+
+                <p>Ordered : {{ order.date }}</p>
+
+                <p>Address : {{ order.address }}</p>
+
+            </div>
+
+            <div>
+
+                {% if order.status %}
+
+                    <span class="badge bg-success">
+                        Delivered
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-warning text-dark">
+                        Processing
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            No orders yet.
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

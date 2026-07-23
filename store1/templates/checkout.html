@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load cart %}
+{%load static%}
+
+{% block content %}
+
+<div class="checkout-page">
+
+    <div class="row">
+
+        <!-- Shipping Form -->
+
+        <div class="col-lg-7">
+
+            <div class="checkout-card">
+
+                <div class="checkout-header">
+                    <h2>Checkout</h2>
+                    <p>Enter your delivery details.</p>
+                </div>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="checkout-group">
+
+                        <label for="address">
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="5"
+                            placeholder="Enter your complete delivery address"
+                            required></textarea>
+
+                    </div>
+
+                    <div class="checkout-group">
+
+                        <label for="phone">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your mobile number"
+                            required>
+
+                    </div>
+
+                    <button class="checkout-btn">
+
+                        Place Order
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Order Summary -->
+
+        <div class="col-lg-5">
+
+            <div class="summary-card">
+
+                <h3 class="summary-title">
+
+                    Order Summary
+
+                </h3>
+
+                {% for product in products %}
+
+                <div class="summary-item">
+
+                    <div>
+
+                        <h6>{{ product.name }}</h6>
+
+                        <span>
+
+                            Qty :
+                            {{ cart|get_item:product.id }}
+
+                        </span>
+
+                    </div>
+
+                    <strong>
+
+                        ₹{{ product|cart_total:cart }}
+
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+                <div class="summary-total">
+
+                    <span>Total Amount</span>
+
+                    <strong>
+
+                        ₹{{ total }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

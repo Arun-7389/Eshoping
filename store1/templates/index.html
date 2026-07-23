@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load cart %}
+
+{% block content %}
+
+<div class="home-header">
+
+    <h2 class="page-title">
+        Our Products
+    </h2>
+
+    <p class="page-subtitle">
+        Discover the latest products at the best prices.
+    </p>
+
+</div>
+
+<div class="row g-4">
+
+    {% for product in products %}
+
+    <div class="col-sm-6 col-md-4 col-lg-3">
+
+        <div class="product-card">
+
+            <!-- Product Image -->
+
+            <div class="product-image-box">
+
+                <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="product-image">
+
+            </div>
+
+            <!-- Product Body -->
+
+            <div class="product-body">
+
+                <h5 class="product-name">
+
+                    {{ product.name }}
+
+                </h5>
+
+                <p class="product-description">
+
+                    {{ product.description|truncatechars:60 }}
+
+                </p>
+
+                <div class="product-price">
+
+                    ₹{{ product.price }}
+
+                </div>
+
+                {% if product|is_in_cart:request.session.cart %}
+
+                <div class="quantity-box">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input
+                                type="hidden"
+                                name="product"
+                                value="{{ product.id }}">
+
+                        <input
+                                type="hidden"
+                                name="remove"
+                                value="True">
+
+                        <button
+                                class="qty-btn minus-btn">
+
+                            -
+
+                        </button>
+
+                    </form>
+
+                    <span class="qty-number">
+
+                        {{ request.session.cart|get_item:product.id }}
+
+                    </span>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input
+                                type="hidden"
+                                name="product"
+                                value="{{ product.id }}">
+
+                        <button
+                                class="qty-btn plus-btn">
+
+                            +
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+                {% else %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <input
+                            type="hidden"
+                            name="product"
+                            value="{{ product.id }}">
+
+                    <button
+                            class="add-cart-btn">
+
+                        Add To Cart
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+
+        <div class="alert alert-warning">
+
+            No products found.
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

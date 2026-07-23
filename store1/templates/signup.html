@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="signup-page">
+
+    <div class="signup-card">
+
+        <div class="signup-header">
+
+            <h2>Create Account</h2>
+
+            <p>
+                Create your free MyStore account and start shopping.
+            </p>
+
+        </div>
+
+        <form method="POST" novalidate>
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label>First Name</label>
+
+                {{ form.first_name }}
+
+                {{ form.first_name.errors }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Last Name</label>
+
+                {{ form.last_name }}
+
+                {{ form.last_name.errors }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Phone Number</label>
+
+                {{ form.phone }}
+
+                {{ form.phone.errors }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                {{ form.email }}
+
+                {{ form.email.errors }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                {{ form.password }}
+
+                {{ form.password.errors }}
+
+            </div>
+
+            <button type="submit" class="signup-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="signup-footer">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

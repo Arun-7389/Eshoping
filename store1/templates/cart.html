@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load cart %}
+
+{% block content %}
+
+<div class="cart-header">
+
+    <h2 class="cart-title">
+        🛒 Shopping Cart
+    </h2>
+
+    <p class="cart-subtitle">
+        Review your items before checkout.
+    </p>
+
+</div>
+
+{% if products %}
+
+{% for product in products %}
+
+<div class="cart-card">
+
+    <div class="cart-image-box">
+
+        <img
+            src="{{ product.image.url }}"
+            alt="{{ product.name }}"
+            class="cart-image">
+
+    </div>
+
+    <div class="cart-content">
+
+        <h3 class="cart-product-name">
+
+            {{ product.name }}
+
+        </h3>
+
+        <p class="cart-product-price">
+
+            ₹ {{ product.price }}
+
+        </p>
+
+        <div class="cart-info">
+
+            <span>
+
+                Quantity :
+                <strong>{{ request.session.cart|get_item:product.id }}</strong>
+
+            </span>
+
+            <span>
+
+                Total :
+                <strong>₹ {{ product|cart_total:request.session.cart }}</strong>
+
+            </span>
+
+        </div>
+
+        <div class="cart-actions">
+
+            <form method="POST" action="{% url 'cart' %}">
+                {% csrf_token %}
+
+                <input type="hidden" name="product" value="{{ product.id }}">
+
+                <input type="hidden" name="remove" value="True">
+
+                <button class="cart-btn minus-btn">
+
+                    −
+
+                </button>
+
+            </form>
+
+            <span class="cart-qty">
+
+                {{ request.session.cart|get_item:product.id }}
+
+            </span>
+
+            <form method="POST" action="{% url 'cart' %}">
+                {% csrf_token %}
+
+                <input type="hidden" name="product" value="{{ product.id }}">
+
+                <button class="cart-btn plus-btn">
+
+                    +
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+<div class="checkout-section">
+
+    <a href="{% url 'checkOut' %}" class="checkout-link">
+
+        Proceed To Checkout →
+
+    </a>
+
+</div>
+
+{% else %}
+
+<div class="empty-cart">
+
+    <h3>Your cart is empty.</h3>
+
+    <a href="{% url 'homepage' %}" class="continue-btn">
+
+        Continue Shopping
+
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
