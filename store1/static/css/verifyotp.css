@@ -1,0 +1,143 @@
+.otp-page {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.otp-card {
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.otp-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.otp-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.otp-group {
+    margin-bottom: 22px;
+}
+
+.otp-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-weight: 600;
+}
+
+.otp-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 6px;
+}
+
+.otp-group input:focus {
+    border-color: #0f172a;
+}
+
+.otp-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.otp-btn:hover {
+    opacity: 0.9;
+}
+
+.otp-error {
+    margin-bottom: 20px;
+    padding: 10px 12px;
+    border-radius: 7px;
+    background: #fee2e2;
+    color: #b91c1c;
+    text-align: center;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 576px) {
+
+    .otp-page {
+        min-height: 65vh;
+        padding: 25px 15px;
+    }
+
+    .otp-card {
+        max-width: 100%;
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+
+    .otp-title {
+        font-size: 24px;
+    }
+
+    .otp-subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .otp-group input {
+        padding: 12px;
+        font-size: 17px;
+        letter-spacing: 5px;
+    }
+
+    .otp-btn {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+
+/* Small phones */
+
+@media (max-width: 360px) {
+
+    .otp-page {
+        padding: 20px 10px;
+    }
+
+    .otp-card {
+        padding: 22px 16px;
+    }
+
+    .otp-title {
+        font-size: 21px;
+    }
+
+    .otp-subtitle {
+        font-size: 13px;
+    }
+}

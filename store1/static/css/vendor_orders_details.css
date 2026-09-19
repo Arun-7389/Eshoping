@@ -1,0 +1,277 @@
+/* ===================== GENERAL ===================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+
+/* ===================== DASHBOARD ===================== */
+
+.vendor-dashboard {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 25px;
+}
+
+
+/* ===================== HEADER ===================== */
+
+.dashboard-header {
+    margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.dashboard-header p {
+    color: #64748b;
+    font-size: 16px;
+}
+
+
+/* ===================== CARD ===================== */
+
+.dashboard-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+
+/* ===================== ORDERS HEADER ===================== */
+
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.orders-header h3 {
+    margin: 0 0 6px;
+    font-size: 22px;
+}
+
+.orders-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.order-count {
+    padding: 8px 14px;
+    background: #f1f5f9;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+}
+
+
+/* ===================== TABLE ===================== */
+
+.orders-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 15px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.orders-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.orders-table td {
+    font-size: 14px;
+    color: #334155;
+}
+
+.orders-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* ===================== ORDER INFORMATION ===================== */
+
+.order-id {
+    font-weight: 700;
+    color: #0f172a !important;
+}
+
+.product-name {
+    font-weight: 600;
+    color: #0f172a !important;
+}
+
+.order-price {
+    font-weight: 600;
+}
+
+
+/* ===================== STATUS BADGES ===================== */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-processing {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-shipped {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.status-delivered {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* ===================== ACTION BUTTONS ===================== */
+
+.order-action form {
+    margin: 0;
+}
+
+.action-btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.accept-btn {
+    background: #2563eb;
+}
+
+.accept-btn:hover {
+    background: #1d4ed8;
+}
+
+.ship-btn {
+    background: #7c3aed;
+}
+
+.ship-btn:hover {
+    background: #6d28d9;
+}
+
+.deliver-btn {
+    background: #16a34a;
+}
+
+.deliver-btn:hover {
+    background: #15803d;
+}
+
+
+/* ===================== COMPLETED ===================== */
+
+.completed-text {
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.cancelled-text {
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ===================== NO ORDERS ===================== */
+
+.no-orders {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.no-orders-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.no-orders h3 {
+    margin-bottom: 8px;
+}
+
+.no-orders p {
+    color: #64748b;
+}
+
+
+/* ===================== MOBILE ===================== */
+
+@media (max-width: 700px) {
+
+    .vendor-dashboard {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 26px;
+    }
+
+    .dashboard-card {
+        padding: 20px;
+    }
+
+    .orders-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .orders-table {
+        min-width: 850px;
+    }
+}

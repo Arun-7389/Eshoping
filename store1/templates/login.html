@@ -1,86 +1,123 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
 
 <div class="login-page">
 
-    <div class="login-card">
 
-        <h2 class="login-title">
+<div class="login-card">
 
-            Welcome Back 👋
+    <h2 class="login-title">
+        Welcome Back 👋
+    </h2>
 
-        </h2>
+    <p class="login-subtitle">
+        Login to continue shopping.
+    </p>
 
-        <p class="login-subtitle">
 
-            Login to continue shopping.
+    <!-- Login Form -->
 
-        </p>
+    <form method="POST">
 
-        {% if error %}
+        {% csrf_token %}
 
-        <div class="alert alert-danger">
 
-            {{ error }}
+        <!-- Email -->
+
+        <div class="login-group">
+
+            <label for="{{ form.email.id_for_label }}">
+                Email Address
+            </label>
+
+            {{ form.email }}
+
+            {% if form.email.errors %}
+
+                <div class="text-danger mt-1">
+                    {{ form.email.errors }}
+                </div>
+
+            {% endif %}
 
         </div>
+
+
+        <!-- Password -->
+
+        <div class="login-group">
+
+            <label for="{{ form.password.id_for_label }}">
+                Password
+            </label>
+
+            {{ form.password }}
+
+            {% if form.password.errors %}
+
+                <div class="text-danger mt-1">
+                    {{ form.password.errors }}
+                </div>
+
+            {% endif %}
+
+     <div class="forgot-password-link">
+    <a href="{% url 'customer_forgot_password' %}">
+        Forgot Password?
+    </a>
+</div>
+
+        </div>
+  
+
+
+        <!-- Invalid Login -->
+
+        {% if form.non_field_errors %}
+
+            <div class="alert alert-danger">
+
+                {{ form.non_field_errors }}
+
+            </div>
 
         {% endif %}
 
-        <form method="POST">
 
-            {% csrf_token %}
+        <!-- Login Button -->
 
-            <div class="login-group">
+        <button
+            type="submit"
+            class="login-btn">
 
-                <label>Email Address</label>
+            Login
 
-                <input
-                    type="email"
-                    name="email"
-                    class="login-input"
-                    placeholder="Enter your email"
-                    required>
+        </button>
 
-            </div>
+    </form>
 
-            <div class="login-group">
 
-                <label>Password</label>
+    <!-- Signup -->
 
-                <input
-                    type="password"
-                    name="password"
-                    class="login-input"
-                    placeholder="Enter your password"
-                    required>
+    <div class="signup-link">
 
-            </div>
+        Don't have an account?
 
-            <button
-                type="submit"
-                class="login-btn">
-
-                Login
-
-            </button>
-
-        </form>
-
-        <div class="signup-link">
-
-            Don't have an account?
-
-            <a href="{% url 'signup' %}">
-
-                Create Account
-
-            </a>
-
-        </div>
+        <a href="{% url 'signup' %}">
+            Create Account
+        </a>
 
     </div>
+
+</div>
+
 
 </div>
 

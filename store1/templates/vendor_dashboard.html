@@ -1,0 +1,53 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}Vendor Dashboard | MyStore{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/vendor_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="vendor-dashboard">
+
+<div class="dashboard-header">
+    <h1>Vendor Dashboard</h1>
+    <p>Welcome, {{ request.user.username }}</p>
+</div>
+
+<!-- Statistics -->
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Total Products</h3>
+        <p>{{ total_products }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Orders</h3>
+        <p>{{ total_orders }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Pending Orders</h3>
+        <p>{{ pending_orders }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Delivered Orders</h3>
+        <p>{{ delivered_orders }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Sales</h3>
+        <p>₹{{ total_sales }}</p>
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

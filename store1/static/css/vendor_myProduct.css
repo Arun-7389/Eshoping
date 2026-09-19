@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background: #f8fafc;
+color: #0f172a;
+}
+
+/* =========================
+PRODUCTS PAGE
+========================= */
+
+.products-page {
+max-width: 1200px;
+margin: 50px auto;
+padding: 0 25px;
+}
+
+/* =========================
+PRODUCTS CARD
+========================= */
+
+.products-card {
+background: white;
+padding: 30px;
+border-radius: 12px;
+border: 1px solid #e2e8f0;
+}
+
+/* =========================
+PRODUCTS HEADER
+========================= */
+
+.products-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 25px;
+}
+
+.products-header h2 {
+margin: 0 0 6px;
+font-size: 24px;
+}
+
+.products-header p {
+margin: 0;
+color: #64748b;
+font-size: 14px;
+}
+
+/* =========================
+ADD PRODUCT BUTTON
+========================= */
+
+.add-btn {
+display: inline-block;
+padding: 10px 18px;
+background: #0f172a;
+color: white;
+text-decoration: none;
+border-radius: 6px;
+font-size: 14px;
+font-weight: 600;
+}
+
+.add-btn:hover {
+background: #1e293b;
+}
+
+/* =========================
+PRODUCTS TABLE
+========================= */
+
+.products-table {
+width: 100%;
+overflow-x: auto;
+}
+
+.products-table table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.products-table th,
+.products-table td {
+padding: 14px;
+text-align: left;
+border-bottom: 1px solid #e2e8f0;
+}
+
+.products-table th {
+background: #f8fafc;
+font-weight: 600;
+color: #475569;
+}
+
+.products-table td {
+font-size: 14px;
+}
+
+.products-table img {
+width: 55px;
+height: 55px;
+object-fit: cover;
+border-radius: 6px;
+}
+
+/* =========================
+PRODUCT DETAILS
+========================= */
+
+.product-name {
+font-weight: 600;
+color: #0f172a;
+}
+
+.product-price {
+font-weight: 600;
+}
+
+/* =========================
+ACTION BUTTONS
+========================= */
+
+.product-actions {
+display: flex;
+gap: 10px;
+align-items: center;
+}
+
+.edit-btn,
+.delete-btn {
+display: inline-block;
+padding: 7px 12px;
+border-radius: 6px;
+text-decoration: none;
+font-size: 13px;
+font-weight: 600;
+}
+
+.edit-btn {
+background: #8d9bb9;
+color: white;
+}
+
+.delete-btn {
+background: #4a4745;
+color: white;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+opacity: 0.85;
+}
+
+/* =========================
+NO PRODUCTS
+========================= */
+
+.no-products {
+text-align: center;
+padding: 50px 20px;
+color: #64748b;
+}
+
+.no-products p {
+margin-bottom: 20px;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+
+.products-page {
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.products-card {
+    padding: 20px;
+}
+
+.products-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.add-btn {
+    width: 100%;
+    text-align: center;
+}
+
+.products-table th,
+.products-table td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.products-table table {
+    min-width: 700px;
+}
+
+.products-table {
+    overflow-x: auto;
+}
+
+.product-actions {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.edit-btn,
+.delete-btn {
+    text-align: center;
+}
+
+}

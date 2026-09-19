@@ -7,6 +7,7 @@ from store1.models.Category import Category
 
 
 class Cart(View):
+    
     def post(self,request):
         product=request.POST.get('product')
         remove=request.POST.get('remove')

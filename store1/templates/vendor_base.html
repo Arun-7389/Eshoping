@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Vendor | MyStore{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/vendor_base.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <nav class="vendor-navbar">
+
+        <a href="{% url 'vendor_dashboard' %}" class="vendor-brand">
+            MyStore Vendor
+        </a>
+
+        <div class="vendor-nav-links">
+
+            <a href="{% url 'vendor_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'vendor_myproduct' %}">
+                My Products
+            </a>
+
+            <a href="{% url 'vendor_orders_details' %}">
+                Orders
+            </a>
+
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    {% block content %}
+    {% endblock %}
+
+
+</body>
+
+</html>

@@ -2,6 +2,14 @@
 {% load cart %}
 {%load static%}
 
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css"/>
+
+{% endblock %}
+
 {% block content %}
 
 <div class="checkout-page">
@@ -10,60 +18,179 @@
 
         <!-- Shipping Form -->
 
-        <div class="col-lg-7">
+            <!-- Shipping Form -->
 
-            <div class="checkout-card">
+<div class="col-lg-7">
 
-                <div class="checkout-header">
-                    <h2>Checkout</h2>
-                    <p>Enter your delivery details.</p>
-                </div>
+    <div class="checkout-card">
 
-                <form method="POST">
+        <div class="checkout-header">
 
-                    {% csrf_token %}
+            <h2>Checkout</h2>
 
-                    <div class="checkout-group">
+            <p>
+                Enter your delivery details.
+            </p>
 
-                        <label for="address">
-                            Delivery Address
-                        </label>
+        </div>
 
-                        <textarea
-                            id="address"
-                            name="address"
-                            rows="5"
-                            placeholder="Enter your complete delivery address"
-                            required></textarea>
+        <form method="POST">
 
+            {% csrf_token %}
+
+            <!--Current location -->
+            <button type="button" id="location-btn" class="location-btn">
+                 📍 Use My Current Location
+            </button>
+            <p id="location-status"></p>
+            <div id="map"></div>
+
+            <!-- Address -->
+
+            <div class="checkout-group">
+
+                <label for="{{ form.address.id_for_label }}">
+                    Delivery Address
+                </label>
+
+                {{ form.address }}
+
+                {% if form.address.errors %}
+
+                    <div class="text-danger mt-1">
+                        {{ form.address.errors }}
                     </div>
 
-                    <div class="checkout-group">
-
-                        <label for="phone">
-                            Mobile Number
-                        </label>
-
-                        <input
-                            type="text"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your mobile number"
-                            required>
-
-                    </div>
-
-                    <button class="checkout-btn">
-
-                        Place Order
-
-                    </button>
-
-                </form>
+                {% endif %}
 
             </div>
 
-        </div>
+
+            <!-- City + State -->
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="checkout-group">
+
+                        <label for="{{ form.city.id_for_label }}">
+                            City
+                        </label>
+
+                        {{ form.city }}
+
+                        {% if form.city.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ form.city.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="checkout-group">
+
+                        <label for="{{ form.state.id_for_label }}">
+                            State
+                        </label>
+
+                        {{ form.state }}
+
+                        {% if form.state.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ form.state.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Pincode + Phone -->
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="checkout-group">
+
+                        <label for="{{ form.pincode.id_for_label }}">
+                            Pincode
+                        </label>
+
+                        {{ form.pincode }}
+
+                        {% if form.pincode.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ form.pincode.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="checkout-group">
+
+                        <label for="{{ form.phone.id_for_label }}">
+                            Mobile Number
+                        </label>
+
+                        {{ form.phone }}
+
+                        {% if form.phone.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ form.phone.errors }}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Location -->
+
+            {{ form.latitude.as_hidden }}
+
+            {{ form.longitude.as_hidden }}
+
+
+            <button
+                type="submit"
+                class="checkout-btn">
+
+                Place Order
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
 
         <!-- Order Summary -->
 
@@ -123,5 +250,300 @@
     </div>
 
 </div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
+
+<script>
+
+    const locationBtn = document.getElementById("location-btn");
+    const locationStatus = document.getElementById("location-status");
+
+    const latitudeInput = document.getElementById("id_latitude");
+    const longitudeInput = document.getElementById("id_longitude");
+
+    const addressInput = document.getElementById("id_address");
+    const cityInput = document.getElementById("id_city");
+    const stateInput = document.getElementById("id_state");
+    const pincodeInput = document.getElementById("id_pincode");
+
+
+    // Default map location
+       const map = L.map("map").setView([17.3850, 78.4867], 12);
+
+
+    // // OpenStreetMap
+    // L.tileLayer(
+    // "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    
+    // {
+    //     attribution:
+    //         '&copy; OpenStreetMap contributors'
+    // }
+    // ).addTo(map);
+    L.maplibreGL({ style: "https://tiles.openfreemap.org/styles/liberty"}
+        
+    ).addTo(map);
+
+
+    let marker = null;
+
+
+    // ==========================
+    // REVERSE GEOCODING
+    // ==========================
+
+    async function getAddress(latitude, longitude) {
+
+        locationStatus.innerText =
+            "Finding your address...";
+
+        try {
+
+            const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&addressdetails=1`
+            );
+
+            const data = await response.json();
+
+            console.log(data);
+
+
+            if (data.address) {
+
+                const address = data.address;
+
+
+                // Full Address
+                addressInput.value =
+                    data.display_name || "";
+
+
+                // City
+                cityInput.value =
+                    address.city ||
+                    address.town ||
+                    address.village ||
+                    address.municipality ||
+                    "";
+
+
+                // State
+                stateInput.value =
+                    address.state || "";
+
+
+                // Pincode
+                pincodeInput.value =
+                    address.postcode || "";
+
+
+                locationStatus.innerText =
+                    "Address found successfully!";
+
+            } else {
+
+                locationStatus.innerText =
+                    "Address could not be found.";
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            locationStatus.innerText =
+                "Unable to find address.";
+
+        }
+
+    }
+
+
+    // ==========================
+    // UPDATE MAP LOCATION
+    // ==========================
+
+    function updateLocation(latitude, longitude) {
+
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+
+
+        // Move map
+        map.setView(
+            [latitude, longitude],
+            17
+        );
+
+
+        // Create marker first time
+        if (marker === null) {
+
+            marker = L.marker(
+                [latitude, longitude],
+                {
+                    draggable: true
+                }
+            ).addTo(map);
+
+        } else {
+
+            marker.setLatLng(
+                [latitude, longitude]
+            );
+
+        }
+
+
+        // Get Address
+        getAddress(
+            latitude,
+            longitude
+        );
+
+
+        // When marker dragged
+        marker.off("dragend");
+
+        marker.on("dragend", function () {
+
+            const position =
+                marker.getLatLng();
+
+            latitudeInput.value =
+                position.lat;
+
+            longitudeInput.value =
+                position.lng;
+
+            getAddress(
+                position.lat,
+                position.lng
+            );
+
+        });
+
+    }
+
+
+    // ==========================
+    // CURRENT LOCATION BUTTON
+    // ==========================
+
+    locationBtn.addEventListener(
+        "click",
+        function () {
+
+            locationStatus.innerText =
+                "Getting your location...";
+
+
+            if (!navigator.geolocation) {
+
+                locationStatus.innerText =
+                    "Geolocation is not supported by your browser.";
+
+                return;
+
+            }
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    console.log(
+                        "Latitude:",
+                        latitude
+                    );
+
+                    console.log(
+                        "Longitude:",
+                        longitude
+                    );
+
+
+                    updateLocation(
+                        latitude,
+                        longitude
+                    );
+
+                },
+
+
+                function (error) {
+
+                    console.error(error);
+
+
+                    if (error.code === 1) {
+
+                        locationStatus.innerText =
+                            "Location permission was denied.";
+
+                    } else if (error.code === 2) {
+
+                        locationStatus.innerText =
+                            "Your location could not be detected.";
+
+                    } else if (error.code === 3) {
+
+                        locationStatus.innerText =
+                            "Location request timed out.";
+
+                    } else {
+
+                        locationStatus.innerText =
+                            "Unable to get your location.";
+
+                    }
+
+                },
+
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+
+            );
+
+        }
+    );
+
+
+    // ==========================
+    // CLICK ANYWHERE ON MAP
+    // ==========================
+
+    map.on("click", function (event) {
+
+        const latitude =
+            event.latlng.lat;
+
+        const longitude =
+            event.latlng.lng;
+
+
+        updateLocation(
+            latitude,
+            longitude
+        );
+
+    });
+
+</script>
+ 
 
 {% endblock %}

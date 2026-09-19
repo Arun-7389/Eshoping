@@ -1,0 +1,79 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}Add Product | MyStore{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vendor_add_product.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="add-product-page">
+
+    <div class="add-product-box">
+
+        <h1>Add Product</h1>
+
+        <p class="subtitle">
+            Add a new product to your store
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <p>
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.name.errors }}
+            </p>
+
+            <p>
+                {{ form.price.label_tag }}
+                {{ form.price }}
+                {{ form.price.errors }}
+            </p>
+
+            <div class="category-section">
+
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                {{ form.category.errors }}
+
+                <p class="category-help">
+                    Don't see your category?
+                    <a href="{% url 'vendor_add_category' %}">
+                        Add New Category
+                    </a>
+                </p>
+
+            </div>
+
+            <p>
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {{ form.description.errors }}
+            </p>
+
+            <p>
+                {{ form.image.label_tag }}
+                {{ form.image }}
+                {{ form.image.errors }}
+            </p>
+
+            <button type="submit">
+                Add Product
+            </button>
+
+        </form>
+
+        <a href="{% url 'vendor_dashboard' %}" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

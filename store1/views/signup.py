@@ -1,7 +1,7 @@
 from django.shortcuts import redirect,render
 
 from django.views import View
-from store1.forms import CustomerForm
+from store1.forms.customer_forms import CustomerForm
 from django.contrib.auth.hashers import make_password
 
 class Signup(View):

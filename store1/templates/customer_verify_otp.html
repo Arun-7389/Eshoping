@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/verifyotp.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="otp-page">
+
+
+<div class="otp-card">
+
+    <h2 class="otp-title">
+        Verify OTP 🔐
+    </h2>
+
+    <p class="otp-subtitle">
+        Enter the 6-digit OTP sent to your email.
+    </p>
+
+    {% if error %}
+        <div class="otp-error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="otp-group">
+
+            <label for="otp">
+                Enter OTP
+            </label>
+
+            <input
+                type="text"
+                id="otp"
+                name="otp"
+                maxlength="6"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="Enter 6-digit OTP"
+                required
+            >
+
+        </div>
+
+        <button type="submit" class="otp-btn">
+            Verify OTP
+        </button>
+
+    </form>
+
+</div>
+
+
+</div>
+
+{% endblock %}

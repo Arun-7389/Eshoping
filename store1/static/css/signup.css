@@ -1,0 +1,313 @@
+/* ====================================
+            SIGNUP PAGE
+==================================== */
+
+.signup-page {
+    min-height: 85vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ====================================
+            SIGNUP CARD
+==================================== */
+
+.signup-card {
+    width: 100%;
+    max-width: 520px;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    padding: 40px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .10);
+
+    box-sizing: border-box;
+}
+
+
+/* ====================================
+            SIGNUP HEADER
+==================================== */
+
+.signup-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.signup-header h2 {
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #0f172a;
+
+    margin-bottom: 8px;
+}
+
+.signup-header p {
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    margin-bottom: 0;
+}
+
+
+/* ====================================
+            FORM GROUP
+==================================== */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: #1e293b;
+}
+
+.form-group input {
+    width: 100%;
+    height: 52px;
+
+    border: 1px solid #d6d6d6;
+
+    border-radius: 12px;
+
+    padding: 0 16px;
+
+    font-size: 15px;
+
+    transition: .3s;
+
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+
+    border-color: #0f172a;
+
+    box-shadow: 0 0 0 4px rgba(15, 23, 42, .10);
+}
+
+
+/* ====================================
+            FORM ERRORS
+==================================== */
+
+.errorlist {
+    list-style: none;
+
+    padding: 0;
+
+    margin: 6px 0 0;
+
+    color: #dc3545;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* ====================================
+            SIGNUP BUTTON
+==================================== */
+
+.signup-btn {
+    width: 100%;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #0f172a;
+
+    color: #fff;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    transition: .3s;
+
+    cursor: pointer;
+}
+
+.signup-btn:hover {
+    background: #1e293b;
+
+    transform: translateY(-2px);
+}
+
+
+/* ====================================
+            SIGNUP FOOTER
+==================================== */
+
+.signup-footer {
+    margin-top: 28px;
+
+    text-align: center;
+
+    color: #64748b;
+
+    line-height: 1.5;
+}
+
+.signup-footer a {
+    text-decoration: none;
+
+    font-weight: 600;
+
+    color: #0f172a;
+}
+
+.signup-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* ====================================
+            TABLET
+==================================== */
+
+@media (max-width: 768px) {
+
+    .signup-page {
+        min-height: 80vh;
+
+        padding: 40px 20px;
+    }
+
+    .signup-card {
+        max-width: 500px;
+
+        padding: 35px;
+    }
+
+    .signup-header h2 {
+        font-size: 30px;
+    }
+
+}
+
+
+/* ====================================
+            MOBILE
+==================================== */
+
+@media (max-width: 576px) {
+
+    .signup-page {
+        min-height: 75vh;
+
+        padding: 25px 12px;
+    }
+
+    .signup-card {
+        padding: 28px 20px;
+
+        border-radius: 16px;
+    }
+
+    .signup-header {
+        margin-bottom: 25px;
+    }
+
+    .signup-header h2 {
+        font-size: 27px;
+    }
+
+    .signup-header p {
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+
+        margin-bottom: 7px;
+    }
+
+    .form-group input {
+        height: 48px;
+
+        padding: 0 14px;
+
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        height: 48px;
+
+        font-size: 16px;
+    }
+
+    .signup-footer {
+        margin-top: 22px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* ====================================
+        VERY SMALL MOBILE
+==================================== */
+
+@media (max-width: 400px) {
+
+    .signup-page {
+        padding: 20px 10px;
+    }
+
+    .signup-card {
+        padding: 24px 16px;
+
+        border-radius: 14px;
+    }
+
+    .signup-header h2 {
+        font-size: 24px;
+    }
+
+    .signup-header p {
+        font-size: 13px;
+    }
+
+    .form-group input {
+        height: 46px;
+
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        height: 46px;
+
+        font-size: 15px;
+    }
+
+}

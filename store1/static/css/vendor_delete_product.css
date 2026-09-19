@@ -1,0 +1,105 @@
+/* =========================
+   DELETE PRODUCT PAGE
+========================= */
+
+.delete-page {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.delete-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.delete-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.delete-card h2 {
+    margin-bottom: 15px;
+    font-size: 26px;
+}
+
+.delete-message {
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.delete-product-name {
+    font-weight: 700;
+}
+
+.delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.delete-confirm-btn,
+.delete-cancel-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-confirm-btn {
+    background: #6a3f3f;
+    color: white;
+}
+
+.delete-confirm-btn:hover {
+    background: #472020;
+}
+
+.delete-cancel-btn {
+    background: #e5e7eb;
+    color: #222;
+}
+
+.delete-cancel-btn:hover {
+    background: #d1d5db;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 576px) {
+
+    .delete-page {
+        padding: 25px 15px;
+    }
+
+    .delete-card {
+        padding: 25px 20px;
+    }
+
+    .delete-card h2 {
+        font-size: 22px;
+    }
+
+    .delete-actions {
+        flex-direction: column;
+    }
+
+    .delete-confirm-btn,
+    .delete-cancel-btn {
+        width: 100%;
+    }
+}

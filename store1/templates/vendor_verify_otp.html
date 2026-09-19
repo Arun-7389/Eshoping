@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify OTP | Vendor</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/vendor_verify_otp.css' %}">
+</head>
+
+<body>
+
+<div class="otp-page">
+
+    <div class="otp-box">
+
+        <h1>Verify OTP 🔐</h1>
+
+        <p>
+            Enter the 6-digit OTP sent to your registered email.
+        </p>
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="otp">Enter OTP</label>
+
+            <input
+                type="text"
+                id="otp"
+                name="otp"
+                maxlength="6"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="Enter 6-digit OTP"
+                required
+            >
+
+            <button type="submit">
+                Verify OTP
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'vendor_forgot_password' %}">
+                ← Back to Forgot Password
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

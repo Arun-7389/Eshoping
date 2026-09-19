@@ -1,0 +1,232 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}
+Vendor Orders | MyStore
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vendor_orders_details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="vendor-dashboard">
+
+    <div class="dashboard-header">
+        <h1>My Orders</h1>
+        <p>Manage orders for your products</p>
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="orders-header">
+            <div>
+                <h3>Customer Orders</h3>
+                <p>View and manage your product orders</p>
+            </div>
+
+            <div class="order-count">
+                {{ orders|length }} Orders
+            </div>
+        </div>
+
+        {% if orders %}
+
+        <div class="orders-table-wrapper">
+
+            <table class="orders-table">
+
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Delivery Address</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for order in orders %}
+
+                    <tr>
+
+                        <td class="order-id">
+                            #{{ order.id }}
+                        </td>
+
+                        <td class="product-name">
+                            {{ order.product.name }}
+                        </td>
+
+                        <td>
+                            {{ order.customer.first_name }}
+                        </td>
+
+                        <td>{{order.phone}}</td>
+
+                        <td>{{order.address}} <br>
+                             {{ order.city }}, {{ order.state }}<br>
+                            {{order.pincode}} </td>
+
+                        <td>
+                            {{ order.quantity }}
+                        </td>
+
+                        <td class="order-price">
+                            ₹{{ order.price }}
+                        </td>
+
+                        <td>
+                            {{ order.date }}
+                        </td>
+
+                        <td>
+
+                            {% if order.status == 'Pending' %}
+
+                                <span class="status-badge status-pending">
+                                    Pending
+                                </span>
+
+                            {% elif order.status == 'Processing' %}
+
+                                <span class="status-badge status-processing">
+                                    Processing
+                                </span>
+
+                            {% elif order.status == 'Shipped' %}
+
+                                <span class="status-badge status-shipped">
+                                    Shipped
+                                </span>
+
+                            {% elif order.status == 'Delivered' %}
+
+                                <span class="status-badge status-delivered">
+                                    Delivered
+                                </span>
+
+                            {% elif order.status == 'Cancelled' %}
+
+                                <span class="status-badge status-cancelled">
+                                    Cancelled
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="order-action">
+
+                            {% if order.status == 'Pending' %}
+
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    <input type="hidden"
+                                           name="order_id"
+                                           value="{{ order.id }}">
+
+                                    <input type="hidden"
+                                           name="status"
+                                           value="Processing">
+
+                                    <button type="submit"
+                                            class="action-btn accept-btn">
+                                        Accept
+                                    </button>
+                                </form>
+
+                            {% elif order.status == 'Processing' %}
+
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    <input type="hidden"
+                                           name="order_id"
+                                           value="{{ order.id }}">
+
+                                    <input type="hidden"
+                                           name="status"
+                                           value="Shipped">
+
+                                    <button type="submit"
+                                            class="action-btn ship-btn">
+                                        Mark Shipped
+                                    </button>
+                                </form>
+
+                            {% elif order.status == 'Shipped' %}
+
+                                <form method="POST">
+                                    {% csrf_token %}
+
+                                    <input type="hidden"
+                                           name="order_id"
+                                           value="{{ order.id }}">
+
+                                    <input type="hidden"
+                                           name="status"
+                                           value="Delivered">
+
+                                    <button type="submit"
+                                            class="action-btn deliver-btn">
+                                        Mark Delivered
+                                    </button>
+                                </form>
+
+                            {% elif order.status == 'Delivered' %}
+
+                                <span class="completed-text">
+                                    ✓ Completed
+                                </span>
+
+                            {% elif order.status == 'Cancelled' %}
+
+                                <span class="cancelled-text">
+                                    Cancelled
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+            <div class="no-orders">
+                <div class="no-orders-icon">
+                    📦
+                </div>
+
+                <h3>No Orders Yet</h3>
+
+                <p>
+                    You don't have any customer orders yet.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

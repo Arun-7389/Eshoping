@@ -1,0 +1,120 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}My Products | MyStore{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/vendor_myProduct.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="products-page">
+
+<div class="products-card">
+
+    <div class="products-header">
+
+        <div>
+            <h2>My Products</h2>
+            <p>Manage the products you have added</p>
+        </div>
+
+        <a href="{% url 'vendor_add_product' %}" class="add-btn">
+            + Add Product
+        </a>
+
+    </div>
+
+
+    {% if products %}
+
+    <div class="products-table">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for product in products %}
+
+                <tr>
+
+                    <td>
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}"
+                                 alt="{{ product.name }}">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+
+                    <td class="product-name">
+                        {{ product.name }}
+                    </td>
+
+                    <td>
+                        {{ product.category.name }}
+                    </td>
+
+                    <td class="product-price">
+                        ₹{{ product.price }}
+                    </td>
+
+                    <td>
+
+                        <div class="product-actions">
+
+                            <a href="{% url 'vendor_edit_product' product.id %}"
+                               class="edit-btn">
+                                ✏️ Edit
+                            </a>
+
+                            <a href="{% url 'vendor_delete_product' product.id %}"
+                               class="delete-btn">
+                                🗑️ Delete
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-products">
+
+        <p>You haven't added any products yet.</p>
+
+        <a href="{% url 'vendor_add_product' %}" class="add-btn">
+            Add Your First Product
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

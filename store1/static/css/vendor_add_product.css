@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.add-product-page {
+    min-height: calc(100vh - 65px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.add-product-box {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.add-product-box h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+.add-product-box form p {
+    margin-bottom: 18px;
+}
+
+.add-product-box label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+
+.add-product-box .errorlist {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 0;
+    color: #dc2626;
+    font-size: 14px;
+    list-style: none;
+}
+
+.add-product-box .errorlist li {
+    color: #dc2626;
+}
+.add-product-box input,
+.add-product-box select,
+.add-product-box textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.add-product-box textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.add-product-box input[type="file"] {
+    padding: 8px;
+}
+
+.add-product-box button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #0f172a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-product-box button:hover {
+    background: #1e293b;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    color: #0f172a;
+    text-decoration: none;
+}
+
+.category-help {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.category-help a {
+    color: #0f172a;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.category-help a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+
+    .add-product-page {
+        padding: 25px 15px;
+    }
+
+    .add-product-box {
+        padding: 25px 20px;
+    }
+
+    .add-product-box h1 {
+        font-size: 26px;
+    }
+}

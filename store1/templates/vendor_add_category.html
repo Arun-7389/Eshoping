@@ -1,0 +1,43 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}Add Category | MyStore{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vendor_add_category.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="category-page">
+
+    <div class="category-box">
+
+        <h1>Add New Category</h1>
+
+        <p>
+            Don't see the category you need?
+            Create a new one here.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Add Category
+            </button>
+
+        </form>
+
+        <a href="{% url 'vendor_add_product' %}">
+            ← Back to Add Product
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

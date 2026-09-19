@@ -1,0 +1,44 @@
+{% extends 'vendor_base.html' %}
+{% load static %}
+
+{% block title %}
+Edit Product | MyStore
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vendor_edit_product.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="edit-product-page">
+
+    <div class="edit-product-card">
+
+        <h2>Edit Product</h2>
+
+        <p class="edit-subtitle">
+            Update your product information
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="update-btn">
+                Update Product
+            </button>
+
+        </form>
+
+        <a href="{% url 'vendor_dashboard' %}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

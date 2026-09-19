@@ -1,45 +1,82 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class="orders-page">
+
+<div class="orders-header">
 
     <h2 class="orders-title">
         My Orders
     </h2>
 
-    {% if orders %}
+    <p class="orders-subtitle">
+        Track your recent purchases and delivery status.
+    </p>
 
-        {% for order in orders %}
+</div>
 
-        <div class="order-card">
+
+{% if orders %}
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+        <!-- Top Section -->
+
+        <div class="order-top">
 
             <div>
 
-                <h4>{{ order.product.name }}</h4>
+                <span class="order-label">
+                    Product
+                </span>
 
-                <p>Quantity : {{ order.quantity }}</p>
-
-                <p>Price : ₹{{ order.price }}</p>
-
-                <p>Ordered : {{ order.date }}</p>
-
-                <p>Address : {{ order.address }}</p>
+                <h3 class="product-name">
+                    {{ order.product.name }}
+                </h3>
 
             </div>
 
-            <div>
 
-                {% if order.status %}
+            <div class="order-status">
 
-                    <span class="badge bg-success">
+                {% if order.status == "Pending" %}
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                {% elif order.status == "Processing" %}
+
+                    <span class="status processing">
+                        Processing
+                    </span>
+
+                {% elif order.status == "Shipped" %}
+
+                    <span class="status shipped">
+                        Shipped
+                    </span>
+
+                {% elif order.status == "Delivered" %}
+
+                    <span class="status delivered">
                         Delivered
                     </span>
 
-                {% else %}
+                {% elif order.status == "Cancelled" %}
 
-                    <span class="badge bg-warning text-dark">
-                        Processing
+                    <span class="status cancelled">
+                        Cancelled
                     </span>
 
                 {% endif %}
@@ -48,17 +85,131 @@
 
         </div>
 
-        {% endfor %}
 
-    {% else %}
+        <!-- Order Information -->
 
-        <div class="alert alert-info">
+        <div class="order-info">
 
-            No orders yet.
+            <div class="info-box">
+
+                <span>
+                    Quantity
+                </span>
+
+                <strong>
+                    {{ order.quantity }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    Price
+                </span>
+
+                <strong>
+                    ₹{{ order.price }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ₹{{ order.total_price }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    Ordered
+                </span>
+
+                <strong>
+                    {{ order.date }}
+                </strong>
+
+            </div>
 
         </div>
 
+
+        <!-- Delivery Information -->
+
+        <div class="delivery-section">
+
+            <h4>
+                Delivery Details
+            </h4>
+
+            <p>
+                {{ order.address }}
+            </p>
+
+            <p>
+                {{ order.city }}, {{ order.state }} -
+                {{ order.pincode }}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                {{ order.phone }}
+            </p>
+
+        </div>
+
+    <div class="order-actions">
+
+    <p>Current Status: {{ order.status }}</p>
+
+    {% if order.status == "Pending" %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden"
+                   name="order_id"
+                   value="{{ order.id }}">
+
+            <button type="submit" class="cancel-order-btn">
+                Cancel Order
+            </button>
+        </form>
+
     {% endif %}
+
+    </div>
+
+    </div>
+
+    {% endfor %}
+
+
+{% else %}
+
+    <div class="empty-orders">
+
+        <h3>
+            No Orders Yet
+        </h3>
+
+        <p>
+            Your orders will appear here after you make a purchase.
+        </p>
+
+    </div>
+
+{% endif %}
 
 </div>
 

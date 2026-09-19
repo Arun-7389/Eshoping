@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Become a Vendor | MyStore</title>
+
+    <link rel="stylesheet" href="{% static 'css/vendor_signup.css' %}">
+</head>
+
+<body>
+
+<div class="vendor-page">
+
+    <div class="vendor-info">
+        <h1>Start Selling on MyStore</h1>
+
+        <p>
+            Turn your products into opportunities.
+            Create your vendor account and start reaching customers.
+        </p>
+
+        <div class="vendor-points">
+            <div>✓ Sell your products</div>
+            <div>✓ Manage your own products</div>
+            <div>✓ Reach more customers</div>
+            <div>✓ Track your orders</div>
+        </div>
+    </div>
+
+
+    <div class="vendor-form-box">
+
+        <h2>Create Vendor Account</h2>
+
+        <p class="subtitle">
+            Register your business with MyStore
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Create Vendor Account
+            </button>
+        </form>
+
+        <p class="login-link">
+            Already a vendor?
+            <a href="{% url 'vendor_login' %}">Login here</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

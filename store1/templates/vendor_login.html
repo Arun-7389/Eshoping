@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Login | MyStore</title>
+    <link rel="stylesheet" href="{% static 'css/vendor_login.css' %}">
+</head>
+
+<body>
+
+<div class="vendor-login-page">
+
+    <div class="vendor-login-box">
+
+        <h1>Vendor Login</h1>
+
+        <p>Login to manage your MyStore business</p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <div class="forgot-password">
+                    <a href="{% url 'vendor_forgot_password' %}">   Forgot Password? </a>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="register-link">
+            Don't have a vendor account?
+            <a href="{% url 'vendor_signup' %}">Register as Vendor</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
